@@ -6,6 +6,7 @@ logs/
 check.py
 configs/debug/
 scripts/debug.sh
+!asset/*
 # optical flow dataset
 datasets/
 
