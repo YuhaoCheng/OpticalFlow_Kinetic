@@ -1,0 +1,75 @@
+DATA:
+  image_size:
+  - 384
+  - 768
+  stage: things
+DESCRIPTION: description
+MODEL:
+  GIM:
+    pretrained_gim_weight: ckpts/loftr_outdoor.ckpt
+    use_gim: true
+    use_gim_weight: true
+  WARPNET:
+    load_gt_occlusion: false
+    use: false
+    warp_img: false
+  attention_type: swin
+  attn_splits_list:
+  - 2
+  feature_channels: 128
+  ffn_dim_expansion: 4
+  num_head: 1
+  num_k: 64
+  num_scales: 1
+  num_transformer_layers: 6
+  padding_factor: 16
+  prop_radius_list:
+  - -1
+  upsample_factor: 8
+  use_k_matches: true
+RESUME:
+  checkpoint: final_ckpts/kinetics_chairs.pth
+  no_resume_optimizer: true
+  strict_resume: false
+  use: true
+SUBMISSION:
+  no_save_flo: true
+  output_path: output
+  submission: false
+SYSTEM:
+  checkpoint_dir: ''
+  exp_id: ''
+  final_ckpt_dir: final_ckpts
+  gpu_ids:
+  - 0
+  - 1
+  local_rank: 0
+TRAIN:
+  LOSS:
+    L1_LOSS:
+      gamma: 0.9
+      max_flow: 400
+    VGG_LOSS:
+      local_vgg19_weight: ckpts/vgg19-dcbb9e9d.pth
+      use: true
+  batch_size: 8
+  grad_clip: 1.0
+  lr: 0.0002
+  max_flow: 400
+  num_steps: 400000
+  num_workers: 4
+  print_freq: 200
+  save_ckpt_freq: 20000
+  save_latest_ckpt_freq: 1000
+  seed: 3407
+  strategy: C+T+S+K+H
+  summary_freq: 400
+  weight_decay: 0.0001
+VALIDATE:
+  eval: false
+  evaluate_matched_unmatched: false
+  val_dataset:
+  - sintel
+  val_freq: 20000
+  with_speed_metric: false
+

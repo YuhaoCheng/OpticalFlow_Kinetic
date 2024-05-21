@@ -1,0 +1,13 @@
+tensorboard
+loguru
+scipy
+scikit-image
+timm
+torchinfo
+h5py
+einops
+faiss-gpu==1.6.4
+six
+kornia
+opencv-python==4.8.1.78
+yacs
